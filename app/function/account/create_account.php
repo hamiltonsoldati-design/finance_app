@@ -21,9 +21,9 @@ function create_account($bdConexao, $conta, $edicao, $id_conta)
             SELECT * FROM contas ORDER BY id_con DESC LIMIT 1;
             ";
 
-            $resultado = mysqli_query($bdConexao, $bdBuscarUltimaContaCadastrada);
+            $resultado = pg_query($bdConexao, $bdBuscarUltimaContaCadastrada);
 
-            $conta = mysqli_fetch_array($resultado);
+            $conta = pg_fetch_array($resultado);
 
             $bdGravar = "
             INSERT INTO extrato
@@ -56,7 +56,7 @@ function create_account($bdConexao, $conta, $edicao, $id_conta)
             ";
         }
 
-        mysqli_query($bdConexao, $bdGravar);
+        pg_query($bdConexao, $bdGravar);
     }
 
     //AQUI COMEÇA A FUNÇÃO PARA GRAVAR/ALTERAR CONTA
@@ -77,7 +77,7 @@ function create_account($bdConexao, $conta, $edicao, $id_conta)
             )
         ";
 
-        mysqli_query($bdConexao, $bdGravar);
+        pg_query($bdConexao, $bdGravar);
 
         insert_openning_balance($bdConexao, $edicao, $conta['saldoinicial'], null);
     } else if ($edicao == true) {
@@ -93,7 +93,7 @@ function create_account($bdConexao, $conta, $edicao, $id_conta)
         WHERE id_con = {$id_conta};
         ";
 
-        mysqli_query($bdConexao, $bdGravar);
+        pg_query($bdConexao, $bdGravar);
 
         insert_openning_balance($bdConexao, $edicao, $conta['saldoinicial'], $id_conta);
     }
