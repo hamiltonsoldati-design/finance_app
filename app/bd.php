@@ -3,7 +3,6 @@
 //Conexão com o banco de dados
 
 $dbServer = getenv("DB_SERVER") ?: '127.0.0.1';
-$dbUser = getenv("DB_USER") ?: 'sa';
 $dbUser = getenv("DB_USER") ?: 'postgres';
 $dbPassword = getenv("DB_PASSWORD") ?: '1234';
 $dbName = getenv("DB_NAME") ?: 'bdcontta';

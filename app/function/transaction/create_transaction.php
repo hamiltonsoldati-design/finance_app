@@ -46,8 +46,8 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
             '{$registro['conta']}'
             )
             ";
-
-            mysqli_query($bdConexao, $bdGravarOrigem);
+            
+            pg_query($bdConexao, $bdGravarOrigem);
 
             $valorDestino = $registro['valor'] * -1;
 
@@ -73,8 +73,8 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
             '{$registro['contadestino']}'
             )
             ";
-
-            mysqli_query($bdConexao, $bdGravarDestino);
+            
+            pg_query($bdConexao, $bdGravarDestino);
         } else if (isset($registro['parcelas']) && $registro['parcelas'] > 1) {
 
             $partesData = explode('-', $registro['data']);
@@ -111,7 +111,7 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
                 )
                 ";
 
-                mysqli_query($bdConexao, $bdGravar);
+                pg_query($bdConexao, $bdGravar);
 
                 if ($mes < 12) {
                     $mes++;
@@ -145,7 +145,7 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
             )
             ";
 
-            mysqli_query($bdConexao, $bdGravar);
+            pg_query($bdConexao, $bdGravar);
         }
     } else if ($edicao == true) {
 
@@ -160,7 +160,7 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
             WHERE id = {$id_reg};
             ";
 
-            mysqli_query($bdConexao, $bdGravarOrigem);
+            pg_query($bdConexao, $bdGravarOrigem);
 
             $valorDestino = $registro['valor'] * -1;
             $idRegDestino = $id_reg + 1;
@@ -174,7 +174,7 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
             WHERE id = {$idRegDestino};
             ";
 
-            mysqli_query($bdConexao, $bdGravarDestino);
+            pg_query($bdConexao, $bdGravarDestino);
         } else if ($editarParcelas == true) {
 
             $partesDescricao = explode('(', $registro['descricao']);
@@ -198,7 +198,7 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
                 WHERE id = {$id_reg};    
                 ";
 
-                mysqli_query($bdConexao, $bdGravar);
+                pg_query($bdConexao, $bdGravar);
 
                 if ($mes < 12) {
                     $mes++;
@@ -223,7 +223,7 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
             WHERE id = {$id_reg};
             ";
 
-            mysqli_query($bdConexao, $bdGravar);
+            pg_query($bdConexao, $bdGravar);
         }
     }
 }
